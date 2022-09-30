@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  node-1:
+    container_name: node-1
+    image: docker pull ubuntu:jammy
+    restart: unless-stopped
+    networks:
+      ansible-network:
+        ipv4_address: 10.5.0.5
+  node-2:
+    container_name: node-2
+    image: docker pull ubuntu:jammy
+    restart: unless-stopped
+    networks:
+      ansible-network:
+        ipv4_address: 10.5.0.6
+  node-3:
+    container_name: node-3
+    image: docker pull ubuntu:jammy
+    restart: unless-stopped
+    networks:
+      ansible-network:
+        ipv4_address: 10.5.0.6
+networks:
+  ansible-network:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
